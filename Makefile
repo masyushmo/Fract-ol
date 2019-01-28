@@ -15,6 +15,9 @@ NAME = fractol
 SRC = ./src/main.c \
 		./src/thread.c \
 		./src/mlx.c \
+		./src/color.c \
+		./src/julia.c \
+		./src/mandelbrot.c
 
 
 OUT = $(SRC:.c=.o)
@@ -27,7 +30,7 @@ all: $(NAME)
 
 $(NAME): $(OUT)
 	make -C ./libft
-	gcc -g -fsanitize=address $(FLAGS) -o $(NAME) $(OUT) $(MLX) ./libft/libft.a
+	gcc $(FLAGS) -g -fsanitize=address -o $(NAME) $(OUT) $(MLX) ./libft/libft.a
 	@echo 'Compilated!'
 
 clean:

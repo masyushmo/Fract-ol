@@ -19,12 +19,10 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 # include <pthread.h>
-# define W_X 500
-# define W_Y 500
-# define THREAD 4
-# define IT 100
-
-typedef struct		s_core	t_core;
+# define W_X 2000
+# define W_Y 1300
+# define THREAD 1
+# define ITERATION 1000
 
 typedef struct		s_image
 {
@@ -35,24 +33,31 @@ typedef struct		s_image
 	int			size;
 }					t_image;
 
-typedef struct		s_args
+typedef struct		s_color
 {
-	double		xmin;
-	double		xmax;
-	double		ymin;
-	double		ymax;
-	double		zoom;
-	double		x;
-	double		y;
-	int			color;
-}					t_args;
 
-typedef struct		s_complex
+}					t_color;
+
+typedef struct		s_core
 {
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			name;
 	double		rx;
 	double		iy;
-	int			i;
-}					t_complex;
+	double		cx;
+	double		cy;
+	double		cxx;
+	double		cxy;
+	double		xx;
+	double		yy;
+	double		zoom;
+	double		xmove;
+	double		ymove;
+	int			color;
+	int			it;
+	t_image		*image;
+}					t_core;
 
 typedef struct		s_tdata
 {
@@ -60,38 +65,30 @@ typedef struct		s_tdata
 	t_core		*core;
 }					t_tdata;
 
-typedef struct		s_core
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_complex	*complex;
-	t_image		*image;
-	t_args		*args;
-	pthread_t	thread[THREAD];
-	t_tdata		tdata[THREAD];
-
-}					t_core;
-
 /*
 **main
 */
 int						main(int argc, char **argv);
 int						stop(char *str);
+int						chose(char *str);
 /*
 **fratals
 */
-
+void					julia(t_core *core, int x, int y);
+void					set_julia(t_core *core);
+void					mandelbrot(t_core *core, int x, int y);
+void					set_mandelbrot(t_core *core);
 /*
 **mlx
 */
-t_core					*create_win(char *stt);
+t_core					*create_win(t_core *core, char *str);
 t_core					*destroy_win(t_core *core);
 t_image					*create_image(t_core *core);
 t_image					*destroy_image(t_core *core, t_image *image);
 /*
 **thread
 */
-int						chose(char *str);
+void					fract_ol(t_core *core, char *str);
 void					*threads(void *too);
 void					thread_add(t_core *core);
 /*
@@ -101,5 +98,8 @@ void					thread_add(t_core *core);
 /*
 **adds
 */
+void					color(t_core *core, int x, int y);
+void					paint_pixel(t_core *core, int x, int y, int color);
+int						sets(int i);
 
 #endif

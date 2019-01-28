@@ -12,39 +12,24 @@
 
 #include "../include/fractol.h"
 
-int		chose(char *str)
+void	fract_ol(t_core *core, char *str)
 {
-	int		i;
-	char	*stt[2] = {"julia", "mandelbrot"};
-
-	i = -1;
-	while (++i < 3)
+	if (ft_strcmp("julia" , str) == 0)
 	{
-		if (ft_strcmp(stt[i], str) == 0)
-		{
-			create_win(str);
-			return (1);
-		}
+		core->name = 1;
+		set_julia(core);
 	}
-	return (0);
-}
-
-void	thread_add(t_core *core)
-{
-	int		i;
-
-	i = -1;
-	while (++i < THREAD)
+	else if(ft_strcmp("mandelbrot", str) == 0)
 	{
-		core->tdata[i].num = i;
-    	core->tdata[i].core = core;
-		pthread_create(core->thread + i, NULL, \
-			threads, (void*)(&core->tdata[i])); 
+		core->name = 2;
+		set_mandelbrot(core);
 	}
-	while(i--)
-		pthread_join(core->thread[i], NULL);
-	mlx_put_image_to_window(core->mlx_ptr, core->win_ptr, \
-		core->image->image_ptr, 0, 0);
+	ft_putnbr(core->name);
+	/*else if	(ft_strcmp("mo", str) == 0)
+	{
+		core->name = 3;
+		set_mo(core);
+	}*/
 }
 
 void	*threads(void *data)
@@ -54,18 +39,47 @@ void	*threads(void *data)
 	int			y;
 
 	too = (t_tdata*)data;
-	y = W_Y / THREAD * too->num;
-	while (y < W_Y / THREAD * (too->num + 1))
+	y = W_X / THREAD * too->num;
+	while (y < W_X / THREAD * (too->num + 1))
 	{
-		x = -1;
-		while (++x < W_X)
+		x = 0;
+		while (x < W_Y)
 		{
-			if (x < 0 || x >= W_X || y <= 0 || y >= W_Y)
-				return ;
-			*(int *)(too->core->image->addr + ((x * 4) + ((y - 1) * W_X * 4))) = color();
+			if (too->core->name == 1)
+				julia(too->core, x, y);
+			if (too->core->name == 2)
+				mandelbrot(too->core, x, y);
+			/*else if (too->core->name == 3)
+				mo(too->core, x, y);*/
+			x++;
 		}
 		y++;
 	}
 	return (NULL);
+}
+
+void	thread_add(t_core *core)
+{
+	pthread_t	thread[THREAD];
+	t_tdata		args[THREAD];
+	int			i;
+
+	i = 0;
+	while (i < THREAD)
+	{
+		args[i].num = i;
+		args[i].core = core;
+		pthread_create(&thread[i], NULL, \
+			threads, (void*)(&args[i]));
+		i++;
+	}
+	i = 0;
+	while (i < THREAD)
+	{
+		pthread_join(thread[i], NULL);
+		i++;
+	}
+	mlx_put_image_to_window(core->mlx_ptr, core->win_ptr, \
+		core->image->image_ptr, 0, 0);
 }
  
