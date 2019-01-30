@@ -32,32 +32,6 @@ void	fract_ol(t_core *core, char *str)
 	}*/
 }
 
-void	*threads(void *data)
-{
-	t_tdata		*too;
-	int			x;
-	int			y;
-
-	too = (t_tdata*)data;
-	y = W_X / THREAD * too->num;
-	while (y < W_X / THREAD * (too->num + 1))
-	{
-		x = 0;
-		while (x < W_Y)
-		{
-			if (too->core->name == 1)
-				julia(too->core, x, y);
-			if (too->core->name == 2)
-				mandelbrot(too->core, x, y);
-			/*else if (too->core->name == 3)
-				mo(too->core, x, y);*/
-			x++;
-		}
-		y++;
-	}
-	return (NULL);
-}
-
 void	thread_add(t_core *core)
 {
 	pthread_t	thread[THREAD];
@@ -69,8 +43,8 @@ void	thread_add(t_core *core)
 	{
 		args[i].num = i;
 		args[i].core = core;
-		pthread_create(&thread[i], NULL, \
-			threads, (void*)(&args[i]));
+		pthread_create(thread + i, NULL, \
+			threads, args + i);
 		i++;
 	}
 	i = 0;
@@ -81,5 +55,26 @@ void	thread_add(t_core *core)
 	}
 	mlx_put_image_to_window(core->mlx_ptr, core->win_ptr, \
 		core->image->image_ptr, 0, 0);
+}
+
+void	*threads(void *data)
+{
+	t_tdata		*too;
+	int			x;
+	int			y;
+
+	too = (t_tdata*)data;
+	x = W_X / THREAD * too->num;
+	while (x < W_X / THREAD * (too->num + 1))
+	{
+		y = 0;
+		while (y < W_Y)
+		{
+			piexel_color(too->core, x, y);
+			y++;
+		}
+		x++;
+	}
+	return (NULL);
 }
  

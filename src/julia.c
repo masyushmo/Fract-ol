@@ -12,7 +12,7 @@
 
 #include "../include/fractol.h"
 
-void	julia(t_core *core, int x, int y)
+int		julia(t_core *core, int x, int y)
 {
 	core->rx = 1.5 * (x - W_X / 2) / (0.5 * core->zoom * W_X) + core->xmove;
 	core->iy = (y - W_Y / 2) / (0.5 * core->zoom * W_Y) + core->ymove;
@@ -27,17 +27,17 @@ void	julia(t_core *core, int x, int y)
 		core->it++;
 	}
 	if (core->it == ITERATION)
-		paint_pixel(core, x, y, 0x000000);
+		return (0x000000);
 	else
-		paint_pixel(core, x, y, (core->color * core->it));
+		return (core->color->set[core->color->c] * core->it);
 }
 
 void	set_julia(t_core *core)
 {
-	core->cx = -0.8;
-	core->cy = 0.156;
+	core->cx = -0.70176;
+	core->cy = -0.3842;
 	core->zoom = 1;
 	core->xmove = 0;
 	core->ymove = 0;
-	core->color = 265;
+	core->color->c = 0;
 }

@@ -19,10 +19,10 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 # include <pthread.h>
-# define W_X 2000
-# define W_Y 1300
+# define W_X 1200
+# define W_Y 1200
 # define THREAD 1
-# define ITERATION 1000
+# define ITERATION 75
 
 typedef struct		s_image
 {
@@ -35,7 +35,8 @@ typedef struct		s_image
 
 typedef struct		s_color
 {
-
+	int			*set;
+	int			c;
 }					t_color;
 
 typedef struct		s_core
@@ -47,17 +48,15 @@ typedef struct		s_core
 	double		iy;
 	double		cx;
 	double		cy;
-	double		cxx;
-	double		cxy;
 	double		xx;
 	double		yy;
 	double		zoom;
 	double		xmove;
 	double		ymove;
-	int			color;
 	int			it;
 	t_image		*image;
-}					t_core;
+	t_color		*color;
+}				t_core;
 
 typedef struct		s_tdata
 {
@@ -74,9 +73,9 @@ int						chose(char *str);
 /*
 **fratals
 */
-void					julia(t_core *core, int x, int y);
+int						julia(t_core *core, int x, int y);
 void					set_julia(t_core *core);
-void					mandelbrot(t_core *core, int x, int y);
+int						mandelbrot(t_core *core, int x, int y);
 void					set_mandelbrot(t_core *core);
 /*
 **mlx
@@ -94,12 +93,17 @@ void					thread_add(t_core *core);
 /*
 **keys
 */
-
+int						key_press(int keycode, t_core *core);
+int						mouse_press(int button, int x, int y, t_core *core);
 /*
 **adds
 */
-void					color(t_core *core, int x, int y);
-void					paint_pixel(t_core *core, int x, int y, int color);
-int						sets(int i);
+void					piexel_color(t_core *core, int x, int y);
+void					color_set(t_core *core);
+/*
+**color
+*/
+void					zoom(int x, int y, t_core *core);
+void					unzoom(int x, int y, t_core *core);
 
 #endif

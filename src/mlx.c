@@ -23,6 +23,7 @@ t_core	*create_win(t_core *core, char *str)
 		destroy_win(core);
 		stop("ERROR: some problem with mlx ;(");
 	}
+	color_set(core);
 	return (core);
 }
 

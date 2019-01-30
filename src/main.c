@@ -41,7 +41,8 @@ int	main(int argc, char **argv)
 	core = create_win(core, argv[1]);
 	fract_ol(core, argv[1]);
 	thread_add(core);
-	//mlx_hook(core->win_ptr, 2, 0, key_press, 0);
+	mlx_hook(core->win_ptr, 2, 0, key_press, core);
+	mlx_hook(core->win_ptr, 4, 0, mouse_press, core);
 	mlx_hook(core->win_ptr, 17, 0, stop, 0);
 	mlx_loop(core->mlx_ptr);
 	return (0);
