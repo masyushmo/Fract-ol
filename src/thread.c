@@ -24,7 +24,6 @@ void	fract_ol(t_core *core, char *str)
 		core->name = 2;
 		set_mandelbrot(core);
 	}
-	ft_putnbr(core->name);
 	/*else if	(ft_strcmp("mo", str) == 0)
 	{
 		core->name = 3;
@@ -37,6 +36,7 @@ void	thread_add(t_core *core)
 	pthread_t	thread[THREAD];
 	t_tdata		args[THREAD];
 	int			i;
+	char		*its;
 
 	i = 0;
 	while (i < THREAD)
@@ -55,6 +55,9 @@ void	thread_add(t_core *core)
 	}
 	mlx_put_image_to_window(core->mlx_ptr, core->win_ptr, \
 		core->image->image_ptr, 0, 0);
+	its = ft_strjoin("ITERATIONS :", ft_itoa(core->iteration));
+	mlx_string_put(core->mlx_ptr, core->win_ptr, \
+		10, 10, 0xFFCCE5, its);
 }
 
 void	*threads(void *data)
@@ -77,4 +80,3 @@ void	*threads(void *data)
 	}
 	return (NULL);
 }
- 

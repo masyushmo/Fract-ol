@@ -18,7 +18,7 @@ int		julia(t_core *core, int x, int y)
 	core->iy = (y - W_Y / 2) / (0.5 * core->zoom * W_Y) + core->ymove;
 	core->it = 0;
 	while (core->rx * core->rx + core->iy
-			* core->iy < 4 && core->it < ITERATION)
+			* core->iy < 4 && core->it < core->iteration)
 	{
 		core->xx = core->rx;
 		core->yy = core->iy;
@@ -26,7 +26,7 @@ int		julia(t_core *core, int x, int y)
 		core->iy = 2 * core->xx * core->yy + core->cy;
 		core->it++;
 	}
-	if (core->it == ITERATION)
+	if (core->it == core->iteration)
 		return (0x000000);
 	else
 		return (core->color->set[core->color->c] * core->it);
@@ -34,10 +34,11 @@ int		julia(t_core *core, int x, int y)
 
 void	set_julia(t_core *core)
 {
-	core->cx = -0.70176;
-	core->cy = -0.3842;
+	core->cx = 0;
+	core->cy = 0;
 	core->zoom = 1;
 	core->xmove = 0;
 	core->ymove = 0;
 	core->color->c = 0;
+	core->iteration = 100;
 }

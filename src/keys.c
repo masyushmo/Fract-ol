@@ -40,6 +40,21 @@ int key_press(int keycode, t_core *core)
 		core->xmove -= 0.05;
 	if (keycode == 123)
 		core->xmove += 0.05;
+	if (keycode == 24)
+		core->iteration += 10;
+	if (keycode == 27 && core->iteration > 0)
+		core->iteration -= 10;
+	thread_add(core);
+	return (0);
+}
+
+int	mouse_move(int x, int y, t_core *core)
+{
+	if (core->name == 1)
+	{
+		core->cx = (x * 0.002) / 2 ;
+		core->cy = (y * 0.002) / 2;
+	}
 	thread_add(core);
 	return (0);
 }

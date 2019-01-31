@@ -27,13 +27,13 @@ OUT = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
-MLX = -lmlx -framework OpenGL -framework AppKit
+MLX = -O2 -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
 $(NAME): $(OUT)
 	make -C ./libft
-	gcc $(FLAGS) -O2 -g -fsanitize=address -o $(NAME) $(OUT) $(MLX) ./libft/libft.a
+	clang $(FLAGS) -g -o $(NAME) $(OUT) $(MLX) ./libft/libft.a
 	@echo 'Compilated!'
 
 clean:

@@ -14,8 +14,8 @@
 
 void zoom(int x, int y, t_core *core)
 {
-	//core->xmove = (x / core->zoom + core->xmove)  - (x / (core->zoom + 1.3));
-	//core->ymove = (y / core->zoom + core->ymove) - (y / (core->zoom + 1.3));
+	core->xmove = (x / core->zoom + core->xmove)  - (x / (core->zoom + 1.3));
+	core->ymove = (y / core->zoom + core->ymove) - (y / (core->zoom + 1.3));
 	core->zoom += 1.3;
 }
 

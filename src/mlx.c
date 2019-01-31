@@ -47,7 +47,7 @@ t_image	*create_image(t_core *core)
 		return (0);
 	image->addr = mlx_get_data_addr(image->image_ptr, &image->bpp,
 		&image->size, &image->endian);
-	image->bpp /= 8;   
+	image->bpp /= 8;  
 	return (image);
 }
 
