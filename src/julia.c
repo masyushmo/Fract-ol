@@ -12,33 +12,35 @@
 
 #include "../include/fractol.h"
 
-int		julia(t_core *core, int x, int y)
+int		julia(t_core *core, t_args *args, int x, int y)
 {
-	core->rx = 1.5 * (x - W_X / 2) / (0.5 * core->zoom * W_X) + core->xmove;
-	core->iy = (y - W_Y / 2) / (0.5 * core->zoom * W_Y) + core->ymove;
-	core->it = 0;
-	while (core->rx * core->rx + core->iy
-			* core->iy < 4 && core->it < core->iteration)
+	args->rx = x / args->zoom + args->xmove;
+	args->iy = y / args->zoom + args->ymove;
+	args->it = 0;
+	while (args->rx * args->rx + args->iy
+			* args->iy < 4 && args->it < core->iteration)
 	{
-		core->xx = core->rx;
-		core->yy = core->iy;
-		core->rx = core->xx * core->xx - core->iy * core->iy + core->cx;
-		core->iy = 2 * core->xx * core->yy + core->cy;
-		core->it++;
+		args->xx = args->rx;
+		args->yy = args->iy;
+		args->rx = args->xx * args->xx - args->iy * args->iy + args->cx;
+		args->iy = 2 * args->xx * args->yy + args->cy;
+		args->it++;
 	}
-	if (core->it == core->iteration)
+	if (args->it == core->iteration)
 		return (0x000000);
 	else
-		return (core->color->set[core->color->c] * core->it);
+		return (core->color->set[core->color->c] * args->it);
 }
 
-void	set_julia(t_core *core)
+void	set_julia(t_core *core, t_args *args)
 {
-	core->cx = 0;
-	core->cy = 0;
-	core->zoom = 1;
-	core->xmove = 0;
-	core->ymove = 0;
+	args->cx = 0;
+	args->cy = 0;
+	args->zoom = 320;
+	args->xmove = -2.13;
+	args->ymove = -1.2;
 	core->color->c = 0;
 	core->iteration = 100;
+	core->jmouse = 0;
+	core->zoomit = 1;
 }

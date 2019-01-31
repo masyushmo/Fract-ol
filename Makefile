@@ -19,7 +19,7 @@ SRC = ./src/main.c \
 		./src/julia.c \
 		./src/mandelbrot.c \
 		./src/keys.c \
-		./src/changes.c
+		./src/changes.c \
 
 
 
@@ -33,7 +33,7 @@ all: $(NAME)
 
 $(NAME): $(OUT)
 	make -C ./libft
-	clang $(FLAGS) -g -o $(NAME) $(OUT) $(MLX) ./libft/libft.a
+	clang $(FLAGS) -g -fsanitize=address -o $(NAME) $(OUT) $(MLX) ./libft/libft.a
 	@echo 'Compilated!'
 
 clean:

@@ -12,36 +12,36 @@
 
 #include "../include/fractol.h"
 
-int		mandelbrot(t_core *core, int x, int y)
+int		mandelbrot(t_core *core, t_args *args, int x, int y)
 {
-	core->cx = 1.5 * (x - W_X / 2) / (0.5 * core->zoom * W_X) + \
-		core->xmove - 0.5;
-	core->cy = (y - W_Y / 2) / (0.5 * core->zoom * W_Y) + core->ymove;
-	core->it = 0;
-	core->rx = 0;
-	core->iy = 0;
-	core->xx = 0;
-	core->yy = 0;
-	while (core->rx * core->rx + core->iy *
-			core->iy < 4 && core->it < core->iteration)
+	args->cx = x / args->zoom + args->xmove;
+	args->cy = y / args->zoom + args->ymove;
+	args->it = 0;
+	args->rx = 0;
+	args->iy = 0;
+	args->xx = 0;
+	args->yy = 0;
+	while (args->rx * args->rx + args->iy *
+			args->iy < 4 && args->it < core->iteration)
 	{
-		core->xx = core->rx * core->rx - core->iy * core->iy + core->cx;
-		core->yy = 2 * core->rx * core->iy + core->cy;
-		core->rx = core->xx;
-		core->iy = core->yy;
-		core->it++;
+		args->xx = args->rx * args->rx - args->iy * args->iy + args->cx;
+		args->yy = 2 * args->rx * args->iy + args->cy;
+		args->rx = args->xx;
+		args->iy = args->yy;
+		args->it++;
 	}
-	if (core->it == core->iteration)
+	if (args->it == core->iteration)
 		return (0x000000);
 	else
-		return (core->color->set[core->color->c] * core->it);
+		return (core->color->set[core->color->c] * args->it);
 }
 
-void	set_mandelbrot(t_core *core)
+void	set_mandelbrot(t_core *core, t_args *args)
 {
-	core->zoom = 1;
-	core->xmove = 0;
-	core->ymove = 0;
+	args->zoom = 330;
+	args->xmove = -2.6;
+	args->ymove = -1.16;
 	core->color->c = 0;
 	core->iteration = 100;
+	core->zoomit = 1;
 }

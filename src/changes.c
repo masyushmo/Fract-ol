@@ -12,16 +12,31 @@
 
 #include "../include/fractol.h"
 
-void zoom(int x, int y, t_core *core)
+int		zoom(int button, int x, int y, t_core *core)
 {
-	core->xmove = (x / core->zoom + core->xmove)  - (x / (core->zoom + 1.3));
-	core->ymove = (y / core->zoom + core->ymove) - (y / (core->zoom + 1.3));
-	core->zoom += 1.3;
-}
-
-void unzoom(int x, int y, t_core *core)
-{
-	//core->x1 = (x / core->zoom + core->x1)  - (x / (core->zoom * 1.3));
-	//core->y1 = (y / core->zoom + core->y1) - (y / (core->zoom * 1.3));
-	core->zoom -= 1;
+	if (button == 4)
+	{
+		if (core->iteration > 0)
+		{
+			core->args.xmove = (x / core->args.zoom + \
+				core->args.xmove) - (x / (core->args.zoom / 1.3));
+			core->args.ymove = (y / core->args.zoom + \
+				core->args.ymove) - (y / (core->args.zoom / 1.3));
+			core->args.zoom /= 1.3;
+			if (core->zoomit == 1)
+				core->iteration -= 10;
+		}
+	}
+	if (button == 5)
+	{
+		core->args.xmove = (x / core->args.zoom + \
+			core->args.xmove) - (x / (core->args.zoom * 1.3));
+		core->args.ymove = (y / core->args.zoom + \
+			core->args.ymove) - (y / (core->args.zoom * 1.3));
+		core->args.zoom *= 1.3;
+		if (core->zoomit == 1)
+			core->iteration += 10;
+	}
+	thread_add(core);
+	return (0);
 }

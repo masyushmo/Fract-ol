@@ -15,20 +15,21 @@
 void	piexel_color(t_core *core, int x, int y)
 {
 	int color;
+
 	if (x >= 0 || x <= W_X || y >= 0 || y <= W_Y)
 	{
 		if (core->name == 1)
-			color = julia(core, x, y);
+			color = julia(core, &core->args, x, y);
 		if (core->name == 2)
-			color = mandelbrot(core, x, y);
-		*(int *)(core->image->addr + 4 * W_X * y + x * 4) = color;
+			color = mandelbrot(core, &core->args, x, y);
+		*(int *)(core->image->addr + ((x * 4) + ((y - 1) * 4 * W_X))) = color;
 	}
 }
 
-void color_set(t_core *core)
+void	color_set(t_core *core)
 {
 	core->color = ft_memalloc(sizeof(t_color));
-	core->color->set =  ft_memalloc(sizeof(int) * 6);
+	core->color->set = ft_memalloc(sizeof(int) * 6);
 	core->color->set[0] = 001002004;
 	core->color->set[1] = 001001202;
 	core->color->set[2] = 001001000;

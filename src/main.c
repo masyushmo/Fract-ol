@@ -21,17 +21,17 @@ int	stop(char *str)
 
 int	chose(char *str)
 {
-	if ((ft_strcmp("julia" , str) == 0) || \
+	if ((ft_strcmp("julia", str) == 0) || \
 		(ft_strcmp("mandelbrot", str) == 0) || \
-		(ft_strcmp("mo", str) == 0))
-			return (1);
+		(ft_strcmp("fern", str) == 0))
+		return (1);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_core	*core;
-	
+
 	if (argc < 2)
 		stop("ERROR: not enough args\n");
 	if (argc > 2)

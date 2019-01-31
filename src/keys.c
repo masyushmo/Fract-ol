@@ -14,15 +14,20 @@
 
 int	mouse_press(int button, int x, int y, t_core *core)
 {
-	if (button == 4)
-		zoom(x, y, core);
-	if (button == 5)
-		unzoom(x, y, core);
+	if (button == 5 || button == 4)
+		zoom(button, x, y, core);
+	if (button == 1)
+	{
+		if (core->jmouse == 1)
+			core->jmouse--;
+		else
+			core->jmouse++;
+	}
 	thread_add(core);
 	return (0);
 }
 
-int key_press(int keycode, t_core *core)
+int	key_press(int keycode, t_core *core)
 {
 	if (keycode == 53)
 		stop("");
@@ -32,14 +37,31 @@ int key_press(int keycode, t_core *core)
 		if (core->color->c + 1 == 7)
 			core->color->c = 0;
 	}
+	if (keycode == 83)
+	{
+		set_julia(core, &core->args);
+		core->name = 1;
+	}
+	if (keycode == 84)
+	{
+		set_mandelbrot(core, &core->args);
+		core->name = 2;
+	}
+	if (keycode == 256)
+	{
+		if (core->zoomit == 1)
+			core->zoomit--;
+		else
+			core->zoomit++;
+	}
 	if (keycode == 126)
-		core->ymove += 0.05;
+		core->args.ymove += 0.05;
 	if (keycode == 125)
-		core->ymove -= 0.05;
+		core->args.ymove -= 0.05;
 	if (keycode == 124)
-		core->xmove -= 0.05;
+		core->args.xmove -= 0.05;
 	if (keycode == 123)
-		core->xmove += 0.05;
+		core->args.xmove += 0.05;
 	if (keycode == 24)
 		core->iteration += 10;
 	if (keycode == 27 && core->iteration > 0)
@@ -50,10 +72,10 @@ int key_press(int keycode, t_core *core)
 
 int	mouse_move(int x, int y, t_core *core)
 {
-	if (core->name == 1)
+	if (core->name == 1 && core->jmouse == 1)
 	{
-		core->cx = (x * 0.002) / 2 ;
-		core->cy = (y * 0.002) / 2;
+		core->args.cx = ((x / core->args.zoom + core->args.xmove) * 1.2);
+		core->args.cy = ((y / core->args.zoom + core->args.ymove) * 1.2);
 	}
 	thread_add(core);
 	return (0);

@@ -13,7 +13,7 @@
 #include "../include/fractol.h"
 
 t_core	*create_win(t_core *core, char *str)
-{	
+{
 	if (!(core = ft_memalloc(sizeof(t_core))))
 		stop("ERROR: some problem with mlx ;(");
 	core->mlx_ptr = mlx_init();
@@ -45,9 +45,9 @@ t_image	*create_image(t_core *core)
 		return (0);
 	if (!(image->image_ptr = mlx_new_image(core->mlx_ptr, W_X, W_Y)))
 		return (0);
-	image->addr = mlx_get_data_addr(image->image_ptr, &image->bpp,
+	image->addr = mlx_get_data_addr(image->image_ptr, &image->bpp, \
 		&image->size, &image->endian);
-	image->bpp /= 8;  
+	image->bpp /= 8;
 	return (image);
 }
 
