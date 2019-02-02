@@ -72,7 +72,7 @@ typedef struct		s_tdata
 }					t_tdata;
 
 /*
-**main
+**main.c
 */
 int					main(int argc, char **argv);
 int					stop(char *str);
@@ -84,34 +84,37 @@ int					julia(t_core *core, t_args *args, int x, int y);
 void				set_julia(t_core *core, t_args *args);
 int					mandelbrot(t_core *core, t_args *args, int x, int y);
 void				set_mandelbrot(t_core *core, t_args *args);
+int					burnship(t_core *core, t_args *args, int x, int y);
+void				set_burnship(t_core *core, t_args *args);
+int					burnjul(t_core *core, t_args *args, int x, int y);
+void				set_burnjul(t_core *core, t_args *args);
 /*
-**mlx
+**mlx.c
 */
 t_core				*create_win(t_core *core, char *str);
 t_core				*destroy_win(t_core *core);
 t_image				*create_image(t_core *core);
 t_image				*destroy_image(t_core *core, t_image *image);
 /*
-**thread
+**thread.c
 */
 void				fract_ol(t_core *core, char *str);
 void				*threads(void *too);
 void				thread_add(t_core *core);
 /*
-**keys
+**keys.c
 */
 int					key_press(int keycode, t_core *core);
 int					mouse_press(int button, int x, int y, t_core *core);
 int					mouse_move(int x, int y, t_core *core);
 /*
-**pixel
+**color.c
 */
 void				piexel_color(t_core *core, int x, int y);
 void				color_set(t_core *core);
+void				color(int keycode, t_core *core);
 /*
-**adds
+**changes.c
 */
-int					zoom(int button, int x, int y, t_core *core);
-void				unzoom(int x, int y, t_core *core);
-
+void				zoom(int button, int x, int y, t_core *core);
 #endif

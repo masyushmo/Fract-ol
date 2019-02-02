@@ -23,7 +23,8 @@ int	chose(char *str)
 {
 	if ((ft_strcmp("julia", str) == 0) || \
 		(ft_strcmp("mandelbrot", str) == 0) || \
-		(ft_strcmp("fern", str) == 0))
+		(ft_strcmp("burnship", str) == 0) || \
+		(ft_strcmp("burnjul", str) == 0))
 		return (1);
 	return (0);
 }

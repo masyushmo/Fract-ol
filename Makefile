@@ -20,20 +20,21 @@ SRC = ./src/main.c \
 		./src/mandelbrot.c \
 		./src/keys.c \
 		./src/changes.c \
-
+		./src/burnship.c \
+		./src/burnjul.c
 
 
 OUT = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
-MLX = -O2 -lmlx -framework OpenGL -framework AppKit
+MLX = -O3 -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
 $(NAME): $(OUT)
 	make -C ./libft
-	clang $(FLAGS) -g -fsanitize=address -o $(NAME) $(OUT) $(MLX) ./libft/libft.a
+	clang $(FLAGS) -o $(NAME) $(OUT) $(MLX) ./libft/libft.a
 	@echo 'Compilated!'
 
 clean:

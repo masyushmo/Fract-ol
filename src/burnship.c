@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   burnship.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasyush <mmasyush@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/24 13:16:56 by mmasyush          #+#    #+#             */
-/*   Updated: 2019/01/24 13:16:56 by mmasyush         ###   ########.fr       */
+/*   Created: 2019/02/02 13:11:28 by mmasyush          #+#    #+#             */
+/*   Updated: 2019/02/02 13:11:28 by mmasyush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-int		julia(t_core *core, t_args *args, int x, int y)
+int		burnship(t_core *core, t_args *args, int x, int y)
 {
-	args->rx = x / args->zoom + args->xmove;
-	args->iy = y / args->zoom + args->ymove;
+	args->cx = x / args->zoom + args->xmove;
+	args->cy = -(y / args->zoom + args->ymove);
 	args->it = 0;
-	while (args->rx * args->rx + args->iy
-			* args->iy < 4 && args->it < core->iteration)
+	args->rx = 0;
+	args->iy = 0;
+	while (args->rx * args->rx + args->iy *
+			args->iy < 4 && args->it < core->iteration)
 	{
-		args->xx = args->rx;
-		args->yy = args->iy;
-		args->rx = args->xx * args->xx - args->iy * args->iy + args->cx;
-		args->iy = 2 * args->xx * args->yy + args->cy;
+		args->xx = args->rx * args->rx - args->iy * args->iy - args->cx;
+		args->yy = 2 * fabs(args->rx * args->iy) - args->cy;
+		args->rx = args->xx;
+		args->iy = args->yy;
 		args->it++;
 	}
 	if (args->it == core->iteration)
@@ -32,15 +34,12 @@ int		julia(t_core *core, t_args *args, int x, int y)
 		return (core->color->set[core->color->c] * args->it);
 }
 
-void	set_julia(t_core *core, t_args *args)
+void	set_burnship(t_core *core, t_args *args)
 {
-	args->cx = 0.3878;
-	args->cy = -0.0975;
-	args->zoom = 320;
-	args->xmove = -2.13;
-	args->ymove = -1.2;
+	args->zoom = 330;
+	args->xmove = -1.8;
+	args->ymove = -1.79;
 	core->color->c = 0;
 	core->iteration = 100;
-	core->jmouse = 0;
 	core->zoomit = 1;
 }

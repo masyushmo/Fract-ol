@@ -16,14 +16,34 @@ void	piexel_color(t_core *core, int x, int y)
 {
 	int color;
 
-	if (x >= 0 || x <= W_X || y >= 0 || y <= W_Y)
+	if (x > 0 && x < W_X && y > 0 && y < W_Y)
 	{
 		if (core->name == 1)
 			color = julia(core, &core->args, x, y);
-		if (core->name == 2)
+		else if (core->name == 2)
 			color = mandelbrot(core, &core->args, x, y);
+		else if (core->name == 3)
+			color = burnship(core, &core->args, x, y);
+		else if (core->name == 4)
+			color = burnjul(core, &core->args, x, y);
 		*(int *)(core->image->addr + ((x * 4) + ((y - 1) * 4 * W_X))) = color;
 	}
+}
+
+void	color(int keycode, t_core *core)
+{
+	if (keycode == 18)
+		core->color->c = 0;
+	else if (keycode == 19)
+		core->color->c = 1;
+	else if (keycode == 20)
+		core->color->c = 2;
+	else if (keycode == 21)
+		core->color->c = 3;
+	else if (keycode == 23)
+		core->color->c = 4;
+	else if (keycode == 22)
+		core->color->c = 5;
 }
 
 void	color_set(t_core *core)

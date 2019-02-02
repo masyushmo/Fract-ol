@@ -24,6 +24,16 @@ void	fract_ol(t_core *core, char *str)
 		core->name = 2;
 		set_mandelbrot(core, &core->args);
 	}
+	else if (ft_strcmp("burnship", str) == 0)
+	{
+		core->name = 3;
+		set_burnship(core, &core->args);
+	}
+	else if (ft_strcmp("burnjul", str) == 0)
+	{
+		core->name = 4;
+		set_burnship(core, &core->args);
+	}
 }
 
 void	thread_add(t_core *core)
@@ -62,17 +72,16 @@ void	*threads(void *data)
 	int			y;
 
 	too = (t_tdata*)data;
-	x = W_X / THREAD * too->num;
-	ft_bzero(too->core->image->addr, W_X * W_Y * too->core->image->bpp);
-	while (x < W_X / THREAD * (too->num + 1))
+	y = W_Y / THREAD * too->num;
+	while (y < (W_Y / THREAD * (too->num + 1)))
 	{
-		y = 0;
-		while (y < W_Y)
+		x = 0;
+		while (x < W_X)
 		{
 			piexel_color(too->core, x, y);
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 	return (NULL);
 }

@@ -12,7 +12,7 @@
 
 #include "../include/fractol.h"
 
-int		zoom(int button, int x, int y, t_core *core)
+void	zoom(int button, int x, int y, t_core *core)
 {
 	if (button == 4)
 	{
@@ -37,6 +37,4 @@ int		zoom(int button, int x, int y, t_core *core)
 		if (core->zoomit == 1)
 			core->iteration += 10;
 	}
-	thread_add(core);
-	return (0);
 }
