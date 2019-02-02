@@ -21,10 +21,9 @@ int	stop(char *str)
 
 int	chose(char *str)
 {
-	if ((ft_strcmp("julia", str) == 0) || \
-		(ft_strcmp("mandelbrot", str) == 0) || \
-		(ft_strcmp("burnship", str) == 0) || \
-		(ft_strcmp("burnjul", str) == 0))
+	if ((!(ft_strcmp("julia", str))) || (!(ft_strcmp("mandelbrot", str))) || \
+		(!(ft_strcmp("burnship", str))) || (!(ft_strcmp("burnjul", str))) || \
+		(!(ft_strcmp("mandela_3", str))) || (!(ft_strcmp("julia_3", str))))
 		return (1);
 	return (0);
 }
@@ -41,7 +40,6 @@ int	main(int argc, char **argv)
 		stop("ERROR: wrong name");
 	core = create_win(core, argv[1]);
 	fract_ol(core, argv[1]);
-	thread_add(core);
 	mlx_hook(core->win_ptr, 2, 0, key_press, core);
 	mlx_hook(core->win_ptr, 4, 0, mouse_press, core);
 	mlx_hook(core->win_ptr, 6, 0, mouse_move, core);

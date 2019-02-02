@@ -43,8 +43,7 @@ t_image	*create_image(t_core *core)
 
 	if (!(image = ft_memalloc(sizeof(t_image))))
 		return (0);
-	if (!(image->image_ptr = mlx_new_image(core->mlx_ptr, W_X, W_Y)))
-		return (0);
+	image->image_ptr = mlx_new_image(core->mlx_ptr, W_X, W_Y);
 	image->addr = mlx_get_data_addr(image->image_ptr, &image->bpp, \
 		&image->size, &image->endian);
 	image->bpp /= 8;

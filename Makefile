@@ -21,7 +21,9 @@ SRC = ./src/main.c \
 		./src/keys.c \
 		./src/changes.c \
 		./src/burnship.c \
-		./src/burnjul.c
+		./src/burnjul.c \
+		./src/mandela_vol3.c \
+		./src/julia_vol3.c
 
 
 OUT = $(SRC:.c=.o)

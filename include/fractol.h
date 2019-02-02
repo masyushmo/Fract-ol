@@ -88,6 +88,12 @@ int					burnship(t_core *core, t_args *args, int x, int y);
 void				set_burnship(t_core *core, t_args *args);
 int					burnjul(t_core *core, t_args *args, int x, int y);
 void				set_burnjul(t_core *core, t_args *args);
+void				set_mandela_vol3(t_core *core, t_args *args);
+int					mandela_vol3(t_core *core, t_args *args, int x, int y);
+void				set_julia_vol3(t_core *core, t_args *args);
+int					julia_vol3(t_core *core, t_args *args, int x, int y);
+int					julia_vol3(t_core *core, t_args *args, int x, int y);
+void				set_julia_vol3(t_core *core, t_args *args);
 /*
 **mlx.c
 */

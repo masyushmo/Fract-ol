@@ -54,6 +54,16 @@ int	key_press(int keycode, t_core *core)
 		set_burnjul(core, &core->args);
 		core->name = 4;
 	}
+	if (keycode == 87)
+	{
+		set_mandela_vol3(core, &core->args);
+		core->name = 5;
+	}
+	if (keycode == 88)
+	{
+		set_julia_vol3(core, &core->args);
+		core->name = 6;
+	}
 	if (keycode == 256)
 	{
 		if (core->zoomit == 1)
@@ -81,7 +91,8 @@ int	key_press(int keycode, t_core *core)
 int	mouse_move(int x, int y, t_core *core)
 {
 	mlx_clear_window(core->mlx_ptr, core->win_ptr);
-	if ((core->name == 1 || core->name == 4 ) && core->jmouse == 1)
+	if ((core->name == 1 || core->name == 4 || \
+		core->name == 6) && core->jmouse == 1)
 	{
 		core->args.cx = ((x / core->args.zoom + core->args.xmove) * 1.2);
 		core->args.cy = ((y / core->args.zoom + core->args.ymove) * 1.2);

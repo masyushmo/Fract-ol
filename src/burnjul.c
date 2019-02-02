@@ -36,9 +36,9 @@ void	set_burnjul(t_core *core, t_args *args)
 {
 	args->cx = 0;
 	args->cy = 0;
-	args->zoom = 300;
-	args->xmove = -2.13;
-	args->ymove = -1.2;
+	args->zoom = 280;
+	args->xmove = -2.43;
+	args->ymove = -1.4;
 	core->color->c = 0;
 	core->iteration = 100;
 	core->jmouse = 0;

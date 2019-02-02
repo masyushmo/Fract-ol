@@ -32,8 +32,19 @@ void	fract_ol(t_core *core, char *str)
 	else if (ft_strcmp("burnjul", str) == 0)
 	{
 		core->name = 4;
-		set_burnship(core, &core->args);
+		set_burnjul(core, &core->args);
 	}
+	else if (ft_strcmp("mandela_3", str) == 0)
+	{
+		core->name = 5;
+		set_mandela_vol3(core, &core->args);
+	}
+	else if (ft_strcmp("julia_3", str) == 0)
+	{
+		core->name = 6;
+		set_julia_vol3(core, &core->args);
+	}
+	thread_add(core);
 }
 
 void	thread_add(t_core *core)
@@ -70,7 +81,7 @@ void	*threads(void *data)
 	t_tdata		*too;
 	int			x;
 	int			y;
-
+	
 	too = (t_tdata*)data;
 	y = W_Y / THREAD * too->num;
 	while (y < (W_Y / THREAD * (too->num + 1)))

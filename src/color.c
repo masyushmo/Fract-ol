@@ -16,8 +16,6 @@ void	piexel_color(t_core *core, int x, int y)
 {
 	int color;
 
-	if (x > 0 && x < W_X && y > 0 && y < W_Y)
-	{
 		if (core->name == 1)
 			color = julia(core, &core->args, x, y);
 		else if (core->name == 2)
@@ -26,8 +24,12 @@ void	piexel_color(t_core *core, int x, int y)
 			color = burnship(core, &core->args, x, y);
 		else if (core->name == 4)
 			color = burnjul(core, &core->args, x, y);
-		*(int *)(core->image->addr + ((x * 4) + ((y - 1) * 4 * W_X))) = color;
-	}
+		else if (core->name == 5)
+			color = mandela_vol3(core, &core->args, x, y);
+		else if (core->name == 6)
+			color = julia_vol3(core, &core->args, x, y);
+		ft_memcpy(core->image->addr + ((x * 4) + ((y - 1) * 4 * W_X)),
+			&color, sizeof(int));
 }
 
 void	color(int keycode, t_core *core)
