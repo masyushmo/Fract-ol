@@ -54,15 +54,21 @@ int	key_press(int keycode, t_core *core)
 		set_burnjul(core, &core->args);
 		core->name = 4;
 	}
+	
 	if (keycode == 87)
 	{
-		set_mandela_vol3(core, &core->args);
+		set_mandela_vol4(core, &core->args);
 		core->name = 5;
 	}
 	if (keycode == 88)
 	{
 		set_julia_vol3(core, &core->args);
 		core->name = 6;
+	}
+	if (keycode == 89)
+	{
+		set_negbrot(core, &core->args);
+		core->name = 7;
 	}
 	if (keycode == 256)
 	{

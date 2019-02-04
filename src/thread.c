@@ -15,35 +15,19 @@
 void	fract_ol(t_core *core, char *str)
 {
 	if (ft_strcmp("julia", str) == 0)
-	{
-		core->name = 1;
-		set_julia(core, &core->args);
-	}
-	else if (ft_strcmp("mandelbrot", str) == 0)
-	{
-		core->name = 2;
-		set_mandelbrot(core, &core->args);
-	}
-	else if (ft_strcmp("burnship", str) == 0)
-	{
-		core->name = 3;
-		set_burnship(core, &core->args);
-	}
-	else if (ft_strcmp("burnjul", str) == 0)
-	{
-		core->name = 4;
-		set_burnjul(core, &core->args);
-	}
-	else if (ft_strcmp("mandela_3", str) == 0)
-	{
-		core->name = 5;
-		set_mandela_vol3(core, &core->args);
-	}
-	else if (ft_strcmp("julia_3", str) == 0)
-	{
-		core->name = 6;
-		set_julia_vol3(core, &core->args);
-	}
+		JUL(core->name, core, core->args);
+	if (ft_strcmp("mandelbrot", str) == 0)
+		MAN(core->name, core, core->args);
+	if (ft_strcmp("burnship", str) == 0)
+		BRN(core->name, core, core->args);
+	if (ft_strcmp("burnjul", str) == 0)
+		BUJ(core->name, core, core->args);
+	if (ft_strcmp("mandela_4", str) == 0)
+		MA4(core->name, core, core->args);
+	if (ft_strcmp("julia_3", str) == 0)
+		JU3(core->name, core, core->args);
+	if (ft_strcmp("negbrot", str) == 0)
+		NEG(core->name, core, core->args);
 	thread_add(core);
 }
 

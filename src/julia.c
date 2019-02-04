@@ -14,16 +14,23 @@
 
 int		julia(t_core *core, t_args *args, int x, int y)
 {
-	args->rx = x / args->zoom + args->xmove;
+	double n;
+
+	args->cx = x / args->zoom + args->xmove;
 	args->iy = y / args->zoom + args->ymove;
 	args->it = 0;
-	while (args->rx * args->rx + args->iy
-			* args->iy < 4 && args->it < core->iteration)
+	args->rx = 0;
+	args->iy = 0;
+	args->xx = 0;
+	args->yy = 0;
+	n = args->rx * args->rx + args->iy * args->iy;
+	while (n < 4 && args->it < core->iteration)
 	{
-		args->xx = args->rx * args->rx - args->iy * args->iy + args->cx;
-		args->yy = 2 * args->rx * args->iy + args->cy;
-		args->rx = args->xx;
-		args->iy = args->yy;
+		args->rx = args->xx - args->yy + args->cx;
+		args->rx = 2 * fabs(args->rx * args->iy) + args->cy;
+		args->xx = args->rx * args->rx;
+		args->yy = args->iy * args->iy;
+		n = args->xx * args->xx + args->yy * args->yy;
 		args->it++;
 	}
 	if (args->it == core->iteration)
@@ -34,8 +41,6 @@ int		julia(t_core *core, t_args *args, int x, int y)
 
 void	set_julia(t_core *core, t_args *args)
 {
-	args->cx = 0;
-	args->cy = 0;
 	args->zoom = 320;
 	args->xmove = -2.13;
 	args->ymove = -1.2;

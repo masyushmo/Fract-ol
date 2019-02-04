@@ -25,9 +25,11 @@ void	piexel_color(t_core *core, int x, int y)
 		else if (core->name == 4)
 			color = burnjul(core, &core->args, x, y);
 		else if (core->name == 5)
-			color = mandela_vol3(core, &core->args, x, y);
+			color = mandela_vol4(core, &core->args, x, y);
 		else if (core->name == 6)
 			color = julia_vol3(core, &core->args, x, y);
+		else if (core->name == 7)
+			color = negbrot(core, &core->args, x, y);
 		ft_memcpy(core->image->addr + ((x * 4) + ((y - 1) * 4 * W_X)),
 			&color, sizeof(int));
 }

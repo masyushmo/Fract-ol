@@ -20,6 +20,13 @@
 # define W_X 1366
 # define W_Y 768
 # define THREAD 1
+# define JUL(n, c, a) {n = 1; set_julia(c, &a);}
+# define MAN(n, c, a) {n = 2; set_mandelbrot(c, &a);}
+# define BRN(n, c, a) {n = 3; set_burnship(c, &a);}
+# define BUJ(n, c, a) {n = 4; set_burnjul(c, &a);}
+# define MA4(n, c, a) {n = 5; set_mandela_vol4(c, &a);}
+# define JU3(n, c, a) {n = 6; set_julia_vol3(c, &a);}
+# define NEG(n, c, a) {n = 7; set_negbrot(c, &a);}
 
 typedef struct		s_image
 {
@@ -88,12 +95,12 @@ int					burnship(t_core *core, t_args *args, int x, int y);
 void				set_burnship(t_core *core, t_args *args);
 int					burnjul(t_core *core, t_args *args, int x, int y);
 void				set_burnjul(t_core *core, t_args *args);
-void				set_mandela_vol3(t_core *core, t_args *args);
-int					mandela_vol3(t_core *core, t_args *args, int x, int y);
-void				set_julia_vol3(t_core *core, t_args *args);
-int					julia_vol3(t_core *core, t_args *args, int x, int y);
 int					julia_vol3(t_core *core, t_args *args, int x, int y);
 void				set_julia_vol3(t_core *core, t_args *args);
+void				set_mandela_vol4(t_core *core, t_args *args);
+int					mandela_vol4(t_core *core, t_args *args, int x, int y);
+void				set_negbrot(t_core *core, t_args *args);
+int					negbrot(t_core *core, t_args *args, int x, int y);
 /*
 **mlx.c
 */

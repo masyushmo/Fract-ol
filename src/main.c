@@ -23,7 +23,8 @@ int	chose(char *str)
 {
 	if ((!(ft_strcmp("julia", str))) || (!(ft_strcmp("mandelbrot", str))) || \
 		(!(ft_strcmp("burnship", str))) || (!(ft_strcmp("burnjul", str))) || \
-		(!(ft_strcmp("mandela_3", str))) || (!(ft_strcmp("julia_3", str))))
+		(!(ft_strcmp("julia_3", str))) || (!(ft_strcmp("mandela_4", str))) || \
+		(!(ft_strcmp("negbrot", str))))
 		return (1);
 	return (0);
 }
