@@ -21,7 +21,7 @@ int		mandela_vol4(t_core *core, t_args *args, int x, int y)
 	args->iy = 0;
 	args->xx = 0;
 	args->yy = 0;
-	while (args->rx * args->rx + args->iy *
+	while (args->rx * args->rx + args->iy * \
 			args->iy < 4 && args->it < core->iteration)
 	{
 		args->xx = ft_expon(args->rx, 4) - 6 * ft_expon(args->rx, 2) * \
@@ -40,10 +40,10 @@ int		mandela_vol4(t_core *core, t_args *args, int x, int y)
 
 void	set_mandela_vol4(t_core *core, t_args *args)
 {
-	args->zoom = 330;
+	args->zoom = 310;
 	args->xmove = -2.10;
-	args->ymove = -1.16;
-	core->color->c = 0;
+	args->ymove = -1.15;
+	core->color->c = 6;
 	core->iteration = 100;
 	core->zoomit = 1;
 }

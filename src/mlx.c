@@ -12,16 +12,16 @@
 
 #include "../include/fractol.h"
 
-t_core	*create_win(t_core *core, char *str)
+t_core	*create_win(t_core *core)
 {
 	if (!(core = ft_memalloc(sizeof(t_core))))
-		stop("ERROR: some problem with mlx ;(");
+		stop("\033[22;31mERROR: some problem with mlx ;(");
 	core->mlx_ptr = mlx_init();
-	core->win_ptr = mlx_new_window(core->mlx_ptr, W_X, W_Y, str);
+	core->win_ptr = mlx_new_window(core->mlx_ptr, W_X, W_Y, "FRACT'OL");
 	if (!(core->image = create_image(core)))
 	{
 		destroy_win(core);
-		stop("ERROR: some problem with mlx ;(");
+		stop("\033[22;31mERROR: some problem with mlx ;(");
 	}
 	color_set(core);
 	return (core);

@@ -30,46 +30,9 @@ int	mouse_press(int button, int x, int y, t_core *core)
 
 int	key_press(int keycode, t_core *core)
 {
-
 	if (keycode == 53)
-		stop("");
+		stop(NULL);
 	mlx_clear_window(core->mlx_ptr, core->win_ptr);
-	if (keycode == 83)
-	{
-		set_julia(core, &core->args);
-		core->name = 1;
-	}
-	if (keycode == 84)
-	{
-		set_mandelbrot(core, &core->args);
-		core->name = 2;
-	}
-	if (keycode == 85)
-	{
-		set_burnship(core, &core->args);
-		core->name = 3;
-	}
-	if (keycode == 86)
-	{
-		set_burnjul(core, &core->args);
-		core->name = 4;
-	}
-	
-	if (keycode == 87)
-	{
-		set_mandela_vol4(core, &core->args);
-		core->name = 5;
-	}
-	if (keycode == 88)
-	{
-		set_julia_vol3(core, &core->args);
-		core->name = 6;
-	}
-	if (keycode == 89)
-	{
-		set_negbrot(core, &core->args);
-		core->name = 7;
-	}
 	if (keycode == 256)
 	{
 		if (core->zoomit == 1)
@@ -77,18 +40,17 @@ int	key_press(int keycode, t_core *core)
 		else
 			core->zoomit++;
 	}
-	if (keycode == 13)
-		core->args.ymove += 0.05;
-	if (keycode == 1)
-		core->args.ymove -= 0.05;
-	if (keycode == 2)
-		core->args.xmove -= 0.05;
-	if (keycode == 0)
-		core->args.xmove += 0.05;
 	if (keycode == 24)
 		core->iteration += 10;
 	if (keycode == 27 && core->iteration > 0)
 		core->iteration -= 10;
+	if (keycode == 15)
+		core->color->set[6] = 001002004;
+	if (keycode == 49)
+		sickomode(core);
+	help(keycode, core);
+	moves(keycode, core);
+	numpad(keycode, core);
 	color(keycode, core);
 	thread_add(core);
 	return (0);

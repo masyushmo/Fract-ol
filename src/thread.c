@@ -26,8 +26,8 @@ void	fract_ol(t_core *core, char *str)
 		MA4(core->name, core, core->args);
 	if (ft_strcmp("julia_3", str) == 0)
 		JU3(core->name, core, core->args);
-	if (ft_strcmp("negbrot", str) == 0)
-		NEG(core->name, core, core->args);
+	if (ft_strcmp("tricorn", str) == 0)
+		TRI(core->name, core, core->args);
 	thread_add(core);
 }
 
@@ -36,13 +36,12 @@ void	thread_add(t_core *core)
 	pthread_t	thread[THREAD];
 	t_tdata		args[THREAD];
 	int			i;
-	char		*its;
 
 	i = 0;
 	while (i < THREAD)
 	{
 		args[i].num = i;
-		args[i].core = core;
+		args[i].core = *core;
 		pthread_create(thread + i, NULL, \
 			threads, args + i);
 		i++;
@@ -55,9 +54,22 @@ void	thread_add(t_core *core)
 	}
 	mlx_put_image_to_window(core->mlx_ptr, core->win_ptr, \
 		core->image->image_ptr, 0, 0);
-	its = ft_strjoin("ITERATIONS :", ft_itoa(core->iteration));
+	put_it(core);
+}
+
+void	put_it(t_core *core)
+{
+	char		*its;
+	char		*num;
+
+	num = ft_itoa(core->iteration);
+	its = ft_strjoin("ITERATIONS :", num);
 	mlx_string_put(core->mlx_ptr, core->win_ptr, \
-		10, 10, 0xFFCCE5, its);
+		10, 10, 0xCC0066, its);
+	mlx_string_put(core->mlx_ptr, core->win_ptr, \
+		11, 30, 0x00FF00, "Press 'H' to see hints");
+	free(its);
+	free(num);
 }
 
 void	*threads(void *data)
@@ -65,18 +77,18 @@ void	*threads(void *data)
 	t_tdata		*too;
 	int			x;
 	int			y;
-	
+
 	too = (t_tdata*)data;
-	y = W_Y / THREAD * too->num;
-	while (y < (W_Y / THREAD * (too->num + 1)))
+	x = W_X / THREAD * too->num;
+	while (x < (W_X / THREAD * (too->num + 1)))
 	{
-		x = 0;
-		while (x < W_X)
+		y = 0;
+		while (y < W_Y)
 		{
-			piexel_color(too->core, x, y);
-			x++;
+			piexel_color(&too->core, x, y);
+			y++;
 		}
-		y++;
+		x++;
 	}
 	return (NULL);
 }

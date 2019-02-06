@@ -16,6 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memccpy(void *restrict dst, const void *restrict src,

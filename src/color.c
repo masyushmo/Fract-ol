@@ -16,22 +16,23 @@ void	piexel_color(t_core *core, int x, int y)
 {
 	int color;
 
-		if (core->name == 1)
-			color = julia(core, &core->args, x, y);
-		else if (core->name == 2)
-			color = mandelbrot(core, &core->args, x, y);
-		else if (core->name == 3)
-			color = burnship(core, &core->args, x, y);
-		else if (core->name == 4)
-			color = burnjul(core, &core->args, x, y);
-		else if (core->name == 5)
-			color = mandela_vol4(core, &core->args, x, y);
-		else if (core->name == 6)
-			color = julia_vol3(core, &core->args, x, y);
-		else if (core->name == 7)
-			color = negbrot(core, &core->args, x, y);
-		ft_memcpy(core->image->addr + ((x * 4) + ((y - 1) * 4 * W_X)),
-			&color, sizeof(int));
+	if (core->name == 1)
+		color = julia(core, &core->args, x, y);
+	else if (core->name == 2)
+		color = mandelbrot(core, &core->args, x, y);
+	else if (core->name == 3)
+		color = burnship(core, &core->args, x, y);
+	else if (core->name == 4)
+		color = burnjul(core, &core->args, x, y);
+	else if (core->name == 5)
+		color = mandela_vol4(core, &core->args, x, y);
+	else if (core->name == 6)
+		color = julia_vol3(core, &core->args, x, y);
+	else if (core->name == 7)
+		color = tricorn(core, &core->args, x, y);
+	if (x >= 0 && x <= W_X && y >= 0 && y <= W_Y)
+		ft_memcpy(core->image->addr + ((x * 4) + ((y - 1) * 4 * W_X)), \
+		&color, sizeof(int));
 }
 
 void	color(int keycode, t_core *core)
@@ -53,11 +54,12 @@ void	color(int keycode, t_core *core)
 void	color_set(t_core *core)
 {
 	core->color = ft_memalloc(sizeof(t_color));
-	core->color->set = ft_memalloc(sizeof(int) * 6);
+	core->color->set = ft_memalloc(sizeof(int) * 7);
 	core->color->set[0] = 001002004;
 	core->color->set[1] = 001001202;
 	core->color->set[2] = 001001000;
 	core->color->set[3] = 022013013;
 	core->color->set[4] = 000600000;
 	core->color->set[5] = 002020000;
+	core->color->set[6] = 001002004;
 }

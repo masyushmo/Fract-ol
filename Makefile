@@ -24,7 +24,7 @@ SRC = ./src/main.c \
 		./src/burnjul.c \
 		./src/julia_vol3.c \
 		./src/mandela_vol4.c \
-		./src/negbrot.c
+		./src/tricorn.c
 
 
 OUT = $(SRC:.c=.o)
