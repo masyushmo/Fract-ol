@@ -15,7 +15,7 @@
 int	mouse_press(int button, int x, int y, t_core *core)
 {
 	mlx_clear_window(core->mlx_ptr, core->win_ptr);
-	if (button == 5 || button == 4)
+	if (button == 5 || button == 4 || button == 2)
 		zoom(button, x, y, core);
 	if (button == 1)
 	{
@@ -28,6 +28,11 @@ int	mouse_press(int button, int x, int y, t_core *core)
 	return (0);
 }
 
+int mouse_release(int button, int x, int y, t_core *core)
+{
+	return(0);
+}
+
 int	key_press(int keycode, t_core *core)
 {
 	if (keycode == 53)
@@ -35,10 +40,10 @@ int	key_press(int keycode, t_core *core)
 	mlx_clear_window(core->mlx_ptr, core->win_ptr);
 	if (keycode == 256)
 	{
-		if (core->zoomit == 1)
-			core->zoomit--;
+		if (core->zoomit == 0)
+			core->zoomit = 1;
 		else
-			core->zoomit++;
+			core->zoomit = 0;
 	}
 	if (keycode == 24)
 		core->iteration += 10;

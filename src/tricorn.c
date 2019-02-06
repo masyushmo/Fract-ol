@@ -41,5 +41,5 @@ void	set_tricorn(t_core *core, t_args *args)
 	args->ymove = -1.70;
 	core->color->c = 6;
 	core->iteration = 100;
-	core->zoomit = 1;
+	core->zoomit = 0;
 }

@@ -126,6 +126,7 @@ void				put_it(t_core *core);
 int					key_press(int keycode, t_core *core);
 int					mouse_press(int button, int x, int y, t_core *core);
 int					mouse_move(int x, int y, t_core *core);
+int					mouse_release(int button, int x, int y, t_core *core);
 /*
 **color.c
 */

@@ -44,5 +44,5 @@ void	set_julia_vol3(t_core *core, t_args *args)
 	core->color->c = 6;
 	core->iteration = 100;
 	core->jmouse = 0;
-	core->zoomit = 1;
+	core->zoomit = 0;
 }

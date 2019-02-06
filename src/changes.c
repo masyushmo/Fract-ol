@@ -62,12 +62,12 @@ void	sickomode(t_core *core)
 	int	ro;
 
 	srand(time(NULL));
-	ro = rand() % 011111111;
-	core->args.cx = sin(core->angle * 4.42);
-	core->args.cy = sin(core->angle / 1.13);
+	ro = rand() % 111111111;
+	core->args.cx = sin(core->angle * 1.2);
+	core->args.cy = sin(core->angle);
 	core->color->c = 6;
 	core->color->set[6] = ro;
-	core->angle += 0.0114;
+	core->angle += 0.3;
 }
 
 void	moves(int keycode, t_core *core)
@@ -90,22 +90,24 @@ void	help(int keycode, t_core *core)
 		core->help_win_ptr = mlx_new_window(core->help_ptr, 640, 360, "HELP");
 		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 10, 0xFF00FF, \
 			"NUM1, NUM2, NUM3, NUM4, NUM5, NUM6, NUM7 == change fractols");
-		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 30, \
-			0x00FFFF, "Mouse wheel == zoom");
+		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 30, 0x00FFFF, \
+			"1, 2, 3, 4, 5, 6 == change colors");
 		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 50, \
-			0xFF00FF, "Left mouse == juls transfomation");
+			0xFF00FF, "Mouse wheel == zoom");
 		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 70, \
-			0x00FFFF, "W /A /S /D == move");
+			0x00FFFF, "Left mouse == juls transfomation");
 		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 90, 0xFF00FF, \
-			"+/- == increase/decrease iteration");
+			"W /A /S /D == move");
 		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 110, 0x00FFFF, \
-			"CTRL == stop/emable auto zoom iteratiom");
+			"+/- == increase/decrease iteration");
 		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 130, 0xFF00FF, \
-			"SPACE == damn, my fractol goin’ psycho");
+			"CTRL == emable/stop auto zoom iteratiom");
 		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 150, 0x00FFFF, \
-			"R == default coloring");
+			"SPACE == damn, my fractol goin’ psycho");
 		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 170, 0xFF00FF, \
-			"Esc == exit");
+			"R == default coloring");
+		mlx_string_put(core->help_ptr, core->help_win_ptr, 10, 190, \
+			0x00FFFF, "Esc == exit");
 		mlx_loop(core->help_ptr);
 	}
 }

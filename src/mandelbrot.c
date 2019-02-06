@@ -43,5 +43,5 @@ void	set_mandelbrot(t_core *core, t_args *args)
 	args->ymove = -1.16;
 	core->color->c = 6;
 	core->iteration = 100;
-	core->zoomit = 1;
+	core->zoomit = 0;
 }
