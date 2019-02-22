@@ -24,14 +24,15 @@ SRC = ./src/main.c \
 		./src/burnjul.c \
 		./src/julia_vol3.c \
 		./src/mandela_vol4.c \
-		./src/tricorn.c
+		./src/tricorn.c \
+		./src/trijul.c
 
 
 OUT = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
-MLX = -O3 -lmlx -framework OpenGL -framework AppKit
+MLX = -O2 -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 

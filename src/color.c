@@ -30,6 +30,8 @@ void	piexel_color(t_core *core, int x, int y)
 		color = julia_vol3(core, &core->args, x, y);
 	else if (core->name == 7)
 		color = tricorn(core, &core->args, x, y);
+	else if (core->name == 8)
+		color = trijul(core, &core->args, x, y);
 	if (x >= 0 && x <= W_X && y >= 0 && y <= W_Y)
 		ft_memcpy(core->image->addr + ((x * 4) + ((y - 1) * 4 * W_X)), \
 		&color, sizeof(int));

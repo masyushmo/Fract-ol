@@ -28,6 +28,8 @@ void	fract_ol(t_core *core, char *str)
 		JU3(core->name, core, core->args);
 	if (ft_strcmp("tricorn", str) == 0)
 		TRI(core->name, core, core->args);
+	if (ft_strcmp("trijul", str) == 0)
+		TRJ(core->name, core, core->args);
 	thread_add(core);
 }
 

@@ -28,11 +28,6 @@ int	mouse_press(int button, int x, int y, t_core *core)
 	return (0);
 }
 
-int mouse_release(int button, int x, int y, t_core *core)
-{
-	return(0);
-}
-
 int	key_press(int keycode, t_core *core)
 {
 	if (keycode == 53)
@@ -65,7 +60,7 @@ int	mouse_move(int x, int y, t_core *core)
 {
 	mlx_clear_window(core->mlx_ptr, core->win_ptr);
 	if ((core->name == 1 || core->name == 4 || \
-		core->name == 6) && core->jmouse == 1)
+		core->name == 6 || core->name == 8) && core->jmouse == 1)
 	{
 		core->args.cx = ((x / core->args.zoom + core->args.xmove) * 1.2);
 		core->args.cy = ((y / core->args.zoom + core->args.ymove) * 1.2);

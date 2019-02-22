@@ -20,7 +20,7 @@
 # include <time.h>
 # define W_X 1280
 # define W_Y 720
-# define THREAD 4
+# define THREAD 8
 # define JUL(n, c, a) {n = 1; set_julia(c, &a);}
 # define MAN(n, c, a) {n = 2; set_mandelbrot(c, &a);}
 # define BRN(n, c, a) {n = 3; set_burnship(c, &a);}
@@ -28,6 +28,7 @@
 # define MA4(n, c, a) {n = 5; set_mandela_vol4(c, &a);}
 # define JU3(n, c, a) {n = 6; set_julia_vol3(c, &a);}
 # define TRI(n, c, a) {n = 7; set_tricorn(c, &a);}
+# define TRJ(n, c, a) {n = 8; set_trijul(c, &a);}
 
 typedef struct		s_image
 {
@@ -106,6 +107,8 @@ void				set_mandela_vol4(t_core *core, t_args *args);
 int					mandela_vol4(t_core *core, t_args *args, int x, int y);
 void				set_tricorn(t_core *core, t_args *args);
 int					tricorn(t_core *core, t_args *args, int x, int y);
+void				set_trijul(t_core *core, t_args *args);
+int					trijul(t_core *core, t_args *args, int x, int y);
 /*
 **mlx.c
 */
@@ -126,7 +129,6 @@ void				put_it(t_core *core);
 int					key_press(int keycode, t_core *core);
 int					mouse_press(int button, int x, int y, t_core *core);
 int					mouse_move(int x, int y, t_core *core);
-int					mouse_release(int button, int x, int y, t_core *core);
 /*
 **color.c
 */
